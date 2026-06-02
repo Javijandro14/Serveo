@@ -7,6 +7,7 @@ package controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +16,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author javie
  */
-public class Home extends HttpServlet {
+@WebServlet(name = "ITSupport", urlPatterns = {"/ITSupport"})
+public class ITSupport extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +36,10 @@ public class Home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");
+            out.println("<title>Servlet ITSupport</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ITSupport at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

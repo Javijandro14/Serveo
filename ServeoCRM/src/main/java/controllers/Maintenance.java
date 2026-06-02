@@ -2,26 +2,41 @@
 
 package controllers;
 
-import dao.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Status;
-import java.awt.Menu;
-import java.awt.geom.Area;
 import java.io.IOException;
-import jdk.jfr.Category;
+import java.io.PrintWriter;
 
 @WebServlet(name = "Maintenance", urlPatterns = { "/Maintenance" })
 public class Maintenance extends HttpServlet {
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Maintenance</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Maintenance at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher vista = request.getRequestDispatcher("/Serveo/web/app/home.jsp");
-        vista.forward(request, response);
+        //vista.forward(request, response);
+        processRequest(request, response);
     }
 
     @Override
@@ -219,5 +234,6 @@ public class Maintenance extends HttpServlet {
         // request.setAttribute("controller", "Maintenance");
         // RequestDispatcher vista = request.getRequestDispatcher(path);
         // vista.forward(request, response);
+        processRequest(request, response);
     }
 }

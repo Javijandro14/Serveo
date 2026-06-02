@@ -96,4 +96,10 @@ public class DaoUser{
         }
         return res;
     }
+    
+    public Boolean login(User user){
+        res = false;
+        if("123".equals(user.getName()) && "123".equals(user.getPassword())) res = true;
+        return res;
+    }
 }

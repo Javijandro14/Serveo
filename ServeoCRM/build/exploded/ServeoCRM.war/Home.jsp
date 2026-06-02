@@ -7,8 +7,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
         
+        <h1>Hello World!</h1>
+        <h1 class="text-3xl font-bold underline">
+            Hello world!
+        </h1>
+        <h1>Login</h1>
+        <ul>
+            <li><a href="../ServeoCRM/Home/EmployeeLogin.jsp">Employee Login</a></li>
+            <li><a href="../ServeoCRM/Home/CustomerLogin.jsp">Customer Login</a></li>
+        </ul>
         <h1>Home</h1>
         <ul>
             <li>
@@ -33,7 +41,7 @@
                 </ul>
             </li>
         </ul>
-        
+
         <h1>Operations</h1>
         <ul>
             <li>
@@ -58,7 +66,7 @@
                 </ul>
             </li>
         </ul>
-        
+
         <h1>Business Insights</h1>
         <ul>
             <li>
@@ -76,7 +84,7 @@
                 </ul>
             </li>
         </ul>
-        
+
         <h1>Back-Office Settings</h1>
         <ul>
             <li>
@@ -94,15 +102,15 @@
                 </ul>
             </li>
         </ul>
-        
+
         <h1>System Settings</h1>
         <ul>
             <li></li>
         </ul>
-        
-        
-        
-        
+
+
+
+
     </body>
     <%@include file="../templates/footers.jsp" %>
 </html>
