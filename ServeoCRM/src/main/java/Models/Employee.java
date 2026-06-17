@@ -4,7 +4,7 @@ public class Employee {
 
     private int idEmployee, idUser;
     private double hourRate;
-    private String firstName, lastName, user, position, hireDate, createDate, modDate;
+    private String firstName, lastName, user, position, status, hireDate, createDate, modDate;
 
     public int getIdEmployee() {
         return idEmployee;
@@ -56,6 +56,14 @@ public class Employee {
 
     public String getPosition() {
         return position;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setPosition(String position) {

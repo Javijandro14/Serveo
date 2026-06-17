@@ -9,5 +9,7 @@ repositories {
 dependencies {
     providedCompile 'jakarta.platform:jakarta.jakartaee-web-api:11.0.0'
     
+    // Add Java Postgre JDBC Driver
+    implementation 'org.postgresql:postgresql:42.7.11' 
     testImplementation     'junit:junit:4.13'
 }

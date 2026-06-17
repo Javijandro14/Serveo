@@ -1,9 +1,8 @@
 package Models;
 
 public class Supplier {
-
     private int idSupplier;
-    private String name, contactName, phone, email, createDate, modDate;
+    private String name, phone, email, description, createDate, modDate;
 
     public int getIdSupplier() {
         return idSupplier;
@@ -19,14 +18,6 @@ public class Supplier {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
     }
 
     public String getPhone() {
@@ -45,6 +36,14 @@ public class Supplier {
         this.email = email;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getCreateDate() {
         return createDate;
     }
@@ -60,6 +59,6 @@ public class Supplier {
     public void setModDate(String modDate) {
         this.modDate = modDate;
     }
-
-
+    
+    
 }

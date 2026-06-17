@@ -20,9 +20,9 @@ public class DaoUser{
             res = con.executeSql("INSERT INTO TBL_USERS VALUES((SELECT MAX(IDAREA)+1 FROM [TBL_TIME_SHEETS]),"+user.getIdRole()+","+user.getName()+","+user.getEmail()+","+user.getPhone()+","+user.getPassword()+",CONVERT(DATE,GETDATE()),CONVERT(DATE,GETDATE()))");
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return res;
     }
@@ -34,9 +34,9 @@ public class DaoUser{
             res = con.executeSql("");
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }
@@ -62,9 +62,9 @@ public class DaoUser{
             }
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listUser;
     }
@@ -76,9 +76,9 @@ public class DaoUser{
             res = con.executeSql("UPDATE TBL_USERS SET USERNAME="+user.getName()+",EMAIL="+user.getEmail()+",PHONE="+user.getPhone()+",PASSWORD_HASH="+user.getPassword()+", MOD_DATE=CONVERT(DATE,GETDATE()) WHERE USER_ID="+user.getIdUser()+" AND ROLE_ID="+user.getIdRole());
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return res;
     }
@@ -90,9 +90,9 @@ public class DaoUser{
             res = con.executeSql("DELETE FROM TBL_USERS WHERE USER_ID="+user.getIdUser()+",ROLE_ID="+user.getIdRole());
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return res;
     }

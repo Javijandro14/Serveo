@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DaoEmployee{
+public class DaoEmployee {
+
     Boolean res = false;
     ResultSet rs = null;
     DbConnection con = new DbConnection();
@@ -17,77 +18,66 @@ public class DaoEmployee{
     public Boolean createEmployee(Employee employee) {
         try {
             con.open();
-            res = con.executeSql("INSERT INTO TBL_EMPLOYEES VALUES((SELECT MAX(IDAREA)+1 FROM [TBL_TIME_SHEETS]),"+employee.getIdUser()+","+employee.getFirstName()+","+employee.getLastName()+","+employee.getPosition()+","+employee.getHourRate()+","+employee.getHireDate()+",CONVERT(DATE,GETDATE()),CONVERT(DATE,GETDATE()))");
+            res = con.executeSql("INSERT INTO public.\"TBL_EMPLOYEES\" VALUES (SELECT MAX(\"EMPLOYEE_ID\")+1 FROM public.\"TBL_EMPLOYEES\", "+employee.getIdUser()+", '"+employee.getFirstName()+"', '"+employee.getLastName()+"', '"+employee.getPosition()+"', "+employee.getHourRate()+", '"+employee.getStatus()+"', '"+employee.getHireDate()+"', CURRENT_DATE, CURRENT_DATE)");
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
         return res;
     }
 
     public Employee findEmployee(Employee employee) {
-        
+
         try {
             con.open();
             res = con.executeSql("");
-            employee.setIdUser(rs.getInt(""));
-            employee.setHourRate(rs.getDouble(""));
-            employee.setFirstName(rs.getString(""));
-            employee.setLastName(rs.getString(""));
-            employee.setUser(rs.getString(""));
-            employee.setPosition(rs.getString(""));
-            employee.setHireDate(rs.getString(""));
-            employee.setCreateDate(rs.getString(""));
-            employee.setModDate(rs.getString(""));
+            
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
         return employee;
     }
 
-    public List<Employee> lstEmployee() {
-        List<Employee> listEmployee = new ArrayList<>();
+    public List<Employee> listEmployee() {
+        List<Employee> lstEmployee = new ArrayList<>();
         try {
-            con.open(); 
-            rs = con.executeQuery("SELECT S.IDSTATUS, S.NAME, S.TYPE, S.MODDATE, S.CREATEDATE FROM STATUS S");
+            con.open();
+            rs = con.executeQuery("SELECT E.\"EMPLOYEE_ID\", U.\"USER_ID\", U.\"USERNAME\", E.\"FIRST_NAME\", E.\"LAST_NAME\", E.\"POSITION\", E.\"HOURLY_RATE\", E.\"STATUS\", E.\"HIRE_DATE\", E.\"CREATE_DATE\", E.\"MOD_DATE\" FROM public.\"TBL_EMPLOYEES\" AS E, public.\"TBL_USERS\" AS U");
             while (rs.next()) {
                 employee = new Employee();
-                employee.setIdEmployee(rs.getInt(""));
-                employee.setIdUser(rs.getInt(""));
-                employee.setHourRate(rs.getDouble(""));
-                employee.setFirstName(rs.getString(""));
-                employee.setLastName(rs.getString(""));
-                employee.setUser(rs.getString(""));
-                employee.setPosition(rs.getString(""));
-                employee.setHireDate(rs.getString(""));
-                employee.setCreateDate(rs.getString(""));
-                employee.setModDate(rs.getString(""));
-                listEmployee.add(employee);
+                employee.setIdEmployee(rs.getInt("CUSTOMER_ID"));
+                employee.setIdUser(rs.getInt("USER_ID"));
+                employee.setUser(rs.getString("USERNAME"));
+                employee.setFirstName(rs.getString("FIRST_NAME"));
+                employee.setLastName(rs.getString("LAST_NAME"));
+                employee.setCreateDate(rs.getString("CREATE_DATE"));
+                employee.setModDate(rs.getString("MOD_DATE"));
+                lstEmployee.add(employee);
             }
             rs.close();
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listEmployee;
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+        return lstEmployee;
     }
 
     public Boolean updateEmployee(Employee employee) {
         try {
             con.open();
-            res = con.executeSql("UPDATE TBL_EMPLOYEES SET FIRST_NAME="+employee.getFirstName()+",LAST_NAME="+employee.getLastName()+",POSITION="+employee.getPosition()+",HOURLY_RATE="+employee.getHourRate()+",HIRE_DATE="+employee.getHourRate()+",MOD_DATE=CONVERT(DATE,GETDATE()) WHERE EMPLOYEE_ID="+employee.getIdEmployee()+" AND USER_ID="+employee.getIdUser());
+            
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
         return res;
     }
@@ -95,12 +85,12 @@ public class DaoEmployee{
     public Boolean deleteEmployee(Employee employee) {
         try {
             con.open();
-            res = con.executeSql("DELETE FROM TBL_EMPLOYEES WHERE EMPLOYEE_ID="+employee.getIdEmployee()+",USER_ID="+employee.getIdUser());
+            res = con.executeSql("DELETE FROM TBL_EMPLOYEES WHERE EMPLOYEE_ID=" + employee.getIdEmployee() + ",USER_ID=" + employee.getIdUser());
             con.close();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(DaoMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
         return res;
     }

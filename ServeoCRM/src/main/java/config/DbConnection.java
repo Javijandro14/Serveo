@@ -15,14 +15,11 @@ public class DbConnection {
     private ResultSet rs = null;
     
     
-    //Ubuntu Server SQL Server from AWS
-    //String Database = "Serveo01",UrlCon = "jdbc:sqlserver://192.168.1.41\\\\SQLEXPRESS\\\\:1433;databaseName="+Database,User = "SA",Pass = "Password123!", driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        
-    // Computer SQL SERVER BDCABANA_V1
-    //String Database = "BDCABANA_V1",UrlCon = "jdbc:sqlserver://JAVIER\\\\SQLEXPRESS\\\\:1433;databaseName=" + Database,User = "cabuser1",Pass = "12345",driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    //Ubuntu Server PostgreSQL Server from AWS
+    String Database = "serveoCRM",UrlCon = "jdbc:postgresql://52.90.219.152:5432/"+Database,User = "serveoadmin",Pass = "12345", driver = "org.postgresql.Driver";
     
-    // Computer SQL SERVER BDCABANA_V2
-    String Database = "BDCABANA_V2",UrlCon = "jdbc:sqlserver://JAVIER\\\\SQLEXPRESS\\\\:1433;databaseName=" + Database, User = "cabuser1", Pass = "12345",driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    //Local Computer PostgreSQL Server
+    //String Database = "serveoCRM", UrlCon = "jdbc:postgresql://localhost:5432/" + Database,User = "serveoAdmin",Pass = "12345",driver = "org.postgresql.Driver";
     
     
     public Connection open() throws ClassNotFoundException {

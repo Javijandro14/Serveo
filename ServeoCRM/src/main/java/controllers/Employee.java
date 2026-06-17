@@ -4,74 +4,131 @@
  */
 package controllers;
 
+import Models.User;
+import dao.DaoCustomer;
+import dao.DaoEmployee;
+import dao.DaoIngredient;
+import dao.DaoSupplier;
+import dao.DaoSupplies;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author javie
- */
 @WebServlet(name = "Employee", urlPatterns = {"/Employee"})
 public class Employee extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Employee</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Employee at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        //response.setContentType("text/html;charset=UTF-8");
+        //RequestDispatcher vista = request.getRequestDispatcher("../ServeoCRM");
+        //vista.forward(request, response);        
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //We Could put conditions if the user had already logged in parameter
+        RequestDispatcher vista = request.getRequestDispatcher("/");
+        vista.forward(request, response);
+        //processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String action = request.getParameter("action"), item = request.getParameter("item");
+        String path = request.getParameter("path"), controller = "Login";
+        //processRequest(request, response);
+        DaoCustomer daoCustomer = new DaoCustomer();
+        DaoEmployee daoEmployee = new DaoEmployee();
+        DaoIngredient daoIngredient = new DaoIngredient();
+        DaoSupplier daoSupplier = new DaoSupplier();
+        DaoSupplies daoSupplies = new DaoSupplies();
+        User user = new User();
+
+        switch (item) {
+            // CRUD for Customer
+            case "customer" -> {
+                if (action.equals("create")) {
+                }
+                if (action.equals("update")) {
+                }
+                if (action.equals("delete")) {
+                }
+                path = "Home/Employee/Customers.jsp";
+                controller = "Employee";
+                request.setAttribute("lstCustomer", daoCustomer.listCustomer());
+            }
+            
+            // CRUD for Employee
+            case "employee" -> {
+                if (action.equals("create")) {
+                }
+                if (action.equals("update")) {
+                }
+                if (action.equals("delete")) {
+                }
+                path = "Home/Employee/Employees.jsp";
+                controller = "Employee";
+                request.setAttribute("lstEmployee", daoEmployee.listEmployee());
+            }
+            
+            //CRUD for Ingredient
+            case "ingredient" -> {
+                if (action.equals("create")) {
+                }
+                if (action.equals("update")) {
+                }
+                if (action.equals("delete")) {
+                }
+                path = "Home/Employee/Ingredients.jsp";
+                controller = "Employee";
+                request.setAttribute("lstIngredient", daoIngredient.listIngredient());
+            }
+
+            //CRUD for Supplier
+            case "supplier" -> {
+                if (action.equals("create")) {
+                }
+                if (action.equals("update")) {
+                }
+                if (action.equals("delete")) {
+                }
+                path = "Home/Employee/Suppliers.jsp";
+                controller = "Employee";
+                request.setAttribute("lstSupplier", daoSupplier.listSupplier());
+            }
+
+            //CRUD for Supplies
+            case "supplies" -> {
+                if (action.equals("create")) {
+                }
+                if (action.equals("update")) {
+                }
+                if (action.equals("delete")) {
+                }
+                path = "Home/Employee/Supplies.jsp";
+                controller = "Employee";
+                request.setAttribute("lstSupplies", daoSupplies.listSupplies());
+            }
+            default ->
+                path = "Home/Employee/EmployeeHome.jsp";
+        }
+
+        request.setAttribute("path", path);
+        request.setAttribute("item", item);
+        request.setAttribute("controller", controller);
+        //Get the RBAC in the controller
+        request.setAttribute("user", user);
+        //request.setAttribute("role", path);
+        RequestDispatcher vista = request.getRequestDispatcher(path);
+        vista.forward(request, response);
+
     }
 
     /**
